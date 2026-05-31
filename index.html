@@ -863,7 +863,7 @@
                         <div class="search-bar">
                             <select id="attendanceMeetingFilter" class="filter-select" style="flex:1"><option value="">Select Meeting</option></select>
                             <button class="btn btn-primary" onclick="loadAttendanceRecords()">Load Records</button>
-                            <button class="btn btn-success" onclick="takeAttendanceForCurrentMeeting()"><i class="fas fa-user-check"></i> Take Attendance</button>
+                            <button class="btn btn-success" onclick="takeAttendanceForCurrentMeeting()"><i class="fas fa-check"></i>Verify & Conclude Meeting</button>
                         </div>
                         <div class="table-container">
                             <table class="data-table" id="attendanceTable">
@@ -1432,7 +1432,7 @@ Doe,John,NYSC/2025/001,1234567890,DL4ALL CDS,Batch A 2025 Stream 1,School A,Serv
                     warningDiv.style.display = 'block';
                     warningDiv.innerHTML = `<div class="alert alert-warning" style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px;">
                         <i class="fas fa-exclamation-triangle"></i> 
-                        Warning: Setting this batch to "Passed Out" will change ${activeMembers.length} corps member(s) in this batch to "Passed Out" status.
+                        Warning: Setting this batch to "Passed Out" will change ${activeMembers.length} corps member(s) in this batch to "Passed Out" status and can not be easily undone.
                     </div>`;
                 } else {
                     warningDiv.style.display = 'block';
@@ -1717,7 +1717,7 @@ Doe,John,NYSC/2025/001,1234567890,DL4ALL CDS,Batch A 2025 Stream 1,School A,Serv
                 <div class="meeting-detail-row"><div class="meeting-detail-label"><i class="fas fa-flag-checkered"></i> Status</div><div class="meeting-detail-value"><span class="status-badge ${meeting.concluded ? 'status-passed' : 'status-serving'}">${meeting.concluded ? 'Concluded' : 'Pending'}</span></div></div>
                 <div class="meeting-detail-row"><div class="meeting-detail-label"><i class="fas fa-align-left"></i> Description</div><div class="meeting-detail-value">${escapeHtml(meeting.description || 'No description')}</div></div>
             </div>
-            ${!meeting.concluded ? `<button class="btn btn-info attendance-action-btn" onclick="navigateToAttendanceWithMeeting('${meeting.id}')"><i class="fas fa-clipboard-list"></i> Take Attendance for this Meeting</button>` : ''}
+            ${!meeting.concluded ? `<button class="btn btn-info attendance-action-btn" onclick="navigateToAttendanceWithMeeting('${meeting.id}')"><i class="fas fa-clipboard-list"></i> Take Attendance</button>` : ''}
         `;
         document.getElementById('meetingDetailModal').classList.add('active');
     }
@@ -2174,7 +2174,7 @@ Doe,John,NYSC/2025/001,1234567890,DL4ALL CDS,Batch A 2025 Stream 1,School A,Serv
                 <td><span class="status-badge ${m.concluded ? 'status-passed' : 'status-serving'}">${m.concluded ? 'Concluded' : 'Pending'}</span></td>
                 <td><button class="btn btn-sm btn-info" onclick="viewMeetingDetails('${m.id}')"><i class="fas fa-eye"></i></button>
                     ${!m.concluded ? `<button class="btn btn-sm btn-primary" onclick="openEditMeetingModal('${m.id}')"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-sm btn-warning" onclick="showConcludeModal('${m.id}', '${escapeHtml(getMeetingNameFromType(m.meetingType))}')"><i class="fas fa-check"></i> Conclude</button>` : ''}
+                    <button class="btn btn-sm btn-warning" onclick="showConcludeModal('${m.id}', '${escapeHtml(getMeetingNameFromType(m.meetingType))}')"><i class="fas fa-check"></i></button>` : ''}
                     <button class="btn btn-sm btn-danger" onclick="showDeleteMeetingModal('${m.id}', '${escapeHtml(getMeetingNameFromType(m.meetingType))}')"><i class="fas fa-trash"></i></button>
                    </td>
                </tr>`; }).join('');
